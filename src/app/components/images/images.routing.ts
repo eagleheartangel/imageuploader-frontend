@@ -9,7 +9,7 @@ const routes: Routes = [
     path: ':page',
     component: MainimagesComponent,
   },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: ':page' },
 ];
 
 @NgModule({
