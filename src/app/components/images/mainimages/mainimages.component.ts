@@ -64,7 +64,7 @@ export class MainimagesComponent implements AfterViewInit, OnDestroy {
       this.getImages(page);
       setTimeout(() => {
         this.paginateStyle.setData(page, this.pages);
-      }, 2000);
+      }, 1000);
     });
     this.cdr.detectChanges();
   }
