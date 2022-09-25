@@ -1,0 +1,11 @@
+<!-- MODAL Verde -->
+<div
+  #progressModal
+  *ngIf="modalState$ | async as modal"
+  class="fixed right-4 top-20 bg-paletteD-two text-paletteD-four rounded-lg z-50 shadow-2xl"
+>
+  <div class="py-2 px-4">
+    <p class="font-bold">{{ modal.title }}</p>
+    <p>{{ modal.description }}</p>
+  </div>
+</div>

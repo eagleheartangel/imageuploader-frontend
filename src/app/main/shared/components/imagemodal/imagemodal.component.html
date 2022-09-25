@@ -1,0 +1,17 @@
+<div
+  class="w-full h-screen fixed top-0 left-0 flex justify-center items-center z-30 backdrop-blur-sm bg-black/30"
+>
+  <div class="w-11/12 h-9/12 mx-auto z-40">
+    <img
+      (clickOutside)="onClickedOutside($event)"
+      [delayClickOutsideInit]="true"
+      [src]="url"
+      class="w-[100vw] h-[90vh] object-cover rounded-2xl z-50"
+    />
+  </div>
+</div>
+<p
+  class="fixed flex justify-center items-center px-3 bg-red-400 rounded-md z-40 top-3 right-3 font-thin text-5xl text-paletteD-four cursor-pointer"
+>
+  x
+</p>

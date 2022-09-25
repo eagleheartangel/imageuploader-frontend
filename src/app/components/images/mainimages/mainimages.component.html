@@ -1,0 +1,92 @@
+<div *ngIf="!data" class="text-2xl">It's time to upload an image! ;)</div>
+<div *ngIf="data" class="w-11/12 mx-auto my-10 z-10">
+  <div
+    class="w-full grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8 mx-auto"
+  >
+    <div
+      *ngFor="let image of images"
+      class="flex justify-center items-center w-full"
+    >
+      <div
+        class="relative w-11/12 lg:w-full bg-paletteD-two rounded-lg shadow-2xl grid grid-cols-1 md:grid-cols-2 transition duration-500 transform hover:scale-105"
+      >
+        <div
+          (click)="confirm(image.uid)"
+          class="absolute top-0 place-self-end z-20 px-2 py-1 bg-red-400 rounded-bl-md rounded-tr-md cursor-pointer"
+        >
+          <fa-icon [icon]="faTrashCan" size="lg"></fa-icon>
+        </div>
+        <img
+          (click)="showModal(image.url)"
+          [src]="image.url"
+          class="rounded-t-lg w-full h-full md:rounded-l-lg md:rounded-r-none object-cover transition duration-200 transform hover:scale-105 hover:rounded-lg cursor-pointer"
+        />
+        <div class="w-full max-h-max grid grid-rows-3 p-2 overflow-y-visible">
+          <div class="mb-2 flex justify-center items-center">
+            <p class="font-extrabold text-xl md:text-2x text-paletteD-five">
+              Description
+            </p>
+          </div>
+          <div class="row-span-2 pb-4 flex justify-center items-center">
+            <p>{{ image.description }}</p>
+          </div>
+          <div class="flex justify-center items-center cursor-default">
+            <p
+              class="px-2 py-1 bg-paletteD-three text-paletteD-one rounded-md text-center text-xs"
+            >
+              created {{ image.createdAt | timeago }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- pagination -->
+  <div class="w-full flex justify-center items-center my-4">
+    <div
+      class="mx-auto text-paletteD-four flex justify-center items-center bg-paletteD-two rounded-md p-2"
+    >
+      <a
+        [routerLink]="['/images', prevPage]"
+        class="h-8 w-8 flex justify-center items-center transition delay-75 duration-300 bg-paletteD-three text-paletteD-one hover:text-paletteD-three hover:bg-paletteD-one rounded-full mr-1"
+      >
+        <
+      </a>
+      <div *ngFor="let num of numberPages">
+        <a
+          [routerLink]="['/images', num]"
+          class="flex justify-center items-center"
+        >
+          <div
+            class="transition delay-75 duration-300 ease-in-out transform hover:scale-110 flex justify-center items-center text-paletteD-one hover:text-paletteD-three hover:bg-paletteD-one rounded-full mx-1"
+          >
+            <div
+              #pages
+              class="w-8 h-8 flex justify-center items-center rounded-full"
+            >
+              {{ num }}
+            </div>
+          </div>
+        </a>
+      </div>
+      <a
+        [routerLink]="['/images', nextPage]"
+        class="h-8 w-8 flex justify-center items-center transition delay-75 duration-300 bg-paletteD-three text-paletteD-one hover:text-paletteD-three hover:bg-paletteD-one rounded-full ml-1"
+      >
+        >
+      </a>
+    </div>
+  </div>
+</div>
+<!-- Modals -->
+<app-imagemodal
+  *ngIf="url && showHide"
+  [url]="url"
+  (closeModal)="closeModal()"
+></app-imagemodal>
+<app-loader *ngIf="loader"></app-loader>
+<app-confirmationmodal
+  (del)="event()"
+  (close)="closeConfirm()"
+  *ngIf="confirmation"
+></app-confirmationmodal>

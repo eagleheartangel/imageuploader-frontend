@@ -25,7 +25,8 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+             "allowedCommonJsDependencies": ["ngx-timeago"]
           },
           "configurations": {
             "production": {

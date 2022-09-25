@@ -1,0 +1,73 @@
+<div
+  class="w-9/12 mx-auto my-10 bg-paletteD-two p-6 flex flex-col justify-center items-center text-center rounded-lg"
+>
+  <p class="text-2xl font-medium">Select your image</p>
+  <img
+    *ngIf="prevImage"
+    [src]="prevImage"
+    class="max-w-[90%] h-auto rounded-md object-cover border-4 border-dashed border-paletteD-three"
+  />
+
+  <form [formGroup]="imageForm" (ngSubmit)="upload()">
+    <div
+      class="w-full h-28 transition duration-300 transform ease-in-out hover:text-paletteD-one hover:scale-105 bg-paletteD-one hover:bg-paletteD-three hover:border-paletteD-one border-paletteD-three rounded-md border-2 border-dashed my-2"
+    >
+      <div class="absolute w-full h-full flex justify-center items-center">
+        <p class="">click here or drop your file ...</p>
+      </div>
+      <input
+        type="file"
+        class="opacity-0 w-full h-full z-20 cursor-pointer"
+        formControlName="image"
+        (change)="change($event)"
+      />
+    </div>
+    <p *ngIf="isvalid('image')" class="text-paletteD-three my-1 mx-auto">
+      {{ envErrormsg("image") }}
+    </p>
+    <textarea
+      class="w-full transition duration-300 focus:outline-none hover:text-paletteD-one hover:border-dashed hover:border-2 bg-paletteD-one hover:bg-paletteD-three hover:border-paletteD-one border-paletteD-three rounded-xl p-4"
+      placeholder="Description ..."
+      rows="3"
+      formControlName="description"
+    ></textarea>
+    <p *ngIf="isvalid('description')" class="text-paletteD-three mt-1 mx-auto">
+      {{ envErrormsg("description") }}
+    </p>
+    <p class="text-2xl font-medium">and</p>
+    <button
+      type="submit"
+      [disabled]="imageForm.pending"
+      class="transition duration-300 transform ease-in-out hover:scale-110 px-2 py-1 mt-2 text-paletteD-three bg-paletteD-one hover:text-paletteD-one hover:bg-paletteD-three hover:border-paletteD-one border-2 border-dashed border-transparent text-xl rounded-md"
+    >
+      upload
+    </button>
+    <!-- <div class="flex flex-col">
+      <div class="flex flex-row">
+        <span>Valid:</span>
+        <pre>{{ imageForm.valid }}</pre>
+      </div>
+
+      <div class="flex flex-row">
+        <span>Pristine:</span>
+        <pre>{{ imageForm.pristine }}</pre>
+      </div>
+
+      <div class="flex flex-row">
+        <span>Touched:</span>
+        <pre>{{ imageForm.touched }}</pre>
+      </div>
+
+      <div class="flex flex-row">
+        <span>value:</span>
+        <pre>{{ imageForm.value | json }}</pre>
+      </div>
+
+      <div class="flex flex-row">
+        <span>image:</span>
+        <pre>{{ imageForm.controls["image"].errors | json }}</pre>
+      </div>
+    </div> -->
+  </form>
+</div>
+<app-loader *ngIf="loader"></app-loader>
